@@ -4,5 +4,8 @@ Hey there! Thanks for taking the time to check out my project. I noticed how lop
 
 # Motivation
 
-An analyst on Twitter had mentioned that Amari Cooper dominates as a home favorite. When the Dallas Cowboys are at home and favored by at least 3 points, Amari Cooper posts unreal stats. provided below is a chart to briefly demonstrate his dominance at home vs. away
+An analyst on Twitter had mentioned that Amari Cooper dominates as a home favorite. When the Dallas Cowboys are at home and favored by at least 3 points, Amari Cooper posts unreal stats. I created a bar plot (code to be posted down the line) and noticed that Amari Cooper averaged 110 yards at home, and only 56 yards on the road.
 
+This motivated me to create a viz for any player, their per game home/away splits and what the Vegas spread/total was. 
+
+# 
