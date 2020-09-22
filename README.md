@@ -9,7 +9,7 @@ An analyst on Twitter had mentioned that Amari Cooper dominates as a home favori
 When the Dallas Cowboys are at home and favored by at least 3 points, Amari Cooper posts unreal stats. 
 I created a bar plot (code to be posted down the line) and noticed that Amari Cooper averaged 110 yards at home, and only 49 yards on the road.
 
-![alt text](![alt text](https://github.com/bwolbransky/nfl-pos-viz-r/blob/master/screenshots/Amari%20Cooper%20home%20away%20splits.png?raw=true) "Amari Cooper Home vs Away Splits")
+![alt text](![alt text](https://github.com/bwolbransky/nfl-pos-viz-r/blob/master/screenshots/Amari%20Cooper%20home%20away%20splits.png?raw=true "Amari Cooper Home vs Away Splits")
 
 This motivated me to create a viz for any player, their per game home/away splits and what the Vegas spread/total was. 
 
