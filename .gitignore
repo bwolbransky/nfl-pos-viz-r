@@ -1,0 +1,10 @@
+*.tiff
+*.png
+*.Rproj
+*.parquet
+*.pdf
+tables/
+.DS_Store
+.RData
+.Rhistory
+.Rproj.user/
