@@ -7,7 +7,7 @@ library(ggimage)
 library(arrow)
 library(nflfastR)
 
-#get df data from 2015 to 2020
+#get df data for season by updating years
 seasons <- seq(2019,2020)
 df <- purrr::map_df(seasons, function(x) {
   download.file(glue::glue("https://raw.githubusercontent.com/guga31bb/nflfastR-data/master/data/play_by_play_{x}.parquet"), "tmp.parquet")
