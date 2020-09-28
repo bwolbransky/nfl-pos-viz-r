@@ -1,6 +1,7 @@
 # nfl-pos-viz-r
 
-Hey there! Thanks for taking the time to check out my project. 
+Hey there! Thanks for taking the time to check out my project. The README is currently under construction as I build out this repo.
+...
 I noticed how lopsided some of Vegas' lines were for NFL player props, and wanted to take a deeper look at finding trends that may give me an edge in the sports betting world.
 
 # Motivation
