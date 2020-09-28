@@ -1,14 +1,15 @@
-#importing libraries
-
+#importing libraries. Only need to run this at beginning of session
 library(tidyverse)
 library(dplyr)
 library(na.tools)
 library(ggimage)
 library(arrow)
-library("nflfastR")
+library(nflfastR)
 
-#get pbp data from 2015 to 2020
-seasons <- seq(2000,2020)
+
+#update seasons to get get play by play (pbp) data from from (start date, end date)
+
+seasons <- seq(2018,2020)
 pbp <- purrr::map_df(seasons, function(x) {
   download.file(glue::glue("https://raw.githubusercontent.com/guga31bb/nflfastR-data/master/data/play_by_play_{x}.parquet"), "tmp.parquet")
   df <- arrow::read_parquet("tmp.parquet")
@@ -16,12 +17,18 @@ pbp <- purrr::map_df(seasons, function(x) {
 }
 )
 
-#rb receiver plots
-#team and name of player, plus props for graph
-team = 'MIN'
-player = 'D.Cook'
-spread = -2.5
-prop = 78.5
+
+#RB Rushing Plots
+#team and 'F.Last' of player, plus props for graph. 
+#If no props, then leave blank. Spread can be Over/Under or spread. 
+
+team = 'GB'
+player = 'A.Jones'
+spread = -.5
+prop = 71.5
+
+
+#Grabbing pbp data and properly format spread, home/away team, and winner.
 
 scatter <- pbp %>%
   mutate(is_home = ifelse(home_team == team,'home','away'),
@@ -31,6 +38,7 @@ scatter <- pbp %>%
          ha_winner = ifelse(home_away_win == "home", home_team, 
                             ifelse(home_away_win == 'away',away_team,"tie")),
          winner = ifelse(ha_winner == team, "y", "n")) %>%
+  #grabbing performance and vegas spread for each game for specified player.
   filter(posteam == team, rusher == player, !is.na(epa)) %>%
   select(season, rusher, is_home, week, team_spread, yardline_100, yards_gained, epa, spread_line, total_line, touchdown, winner) %>%
   group_by(rusher, winner, season,is_home, week, spread_line,team_spread, total_line) %>%
@@ -38,7 +46,8 @@ scatter <- pbp %>%
   group_by(rusher, season, is_home,team_spread, winner,total_line)  
 
 
-#get cols
+#get colors for specified team
+
 col1 <- teams_colors_logos %>%
   filter(team_abbr == team) %>%
   select(team_color)
@@ -48,15 +57,19 @@ col2 <- teams_colors_logos %>%
   filter(team_abbr == team) %>%
   select(team_color2)
 col2 <- as.character(col2[1,1])
+
 #plot
 scatter %>%
+  #use total_line for over/under team_spread for spread
   ggplot(aes(x=team_spread,y=yds_gained, color = is_home)) +
-  geom_jitter(height = 0, width = 0)+
+  geom_jitter(height = 0, width = 0, cex = 1)+
   scale_color_manual(values=c(col2,col1)) +
   theme_bw() +
-  labs(x= "Vegas Spread", y = "Yards", 
+  theme(title = element_text(size =8))+
+  labs(x= "Vegas Spread", y = "Rushing Yards", 
        title = paste(player,"Home vs Away Splits"),
        subtitle = "By Vegas Spread", 
        caption = "Source: @giantsportsball | Data from @nflfastR") +
+  #if no props, comment out these lines or delete them.
   geom_hline(aes(yintercept = prop), linetype = "dashed", color = "grey") +
   geom_vline(aes(xintercept = spread ), linetype = "dashed", color = "grey")
